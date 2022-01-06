@@ -11,8 +11,14 @@
                     <hr class="my-4">
                     <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
                     <p class="lead">
-                        <a class="btn btn-primary btn-lg" href="/login" role="button">Login</a>
-                        <a class="btn btn-success btn-lg" href="/register" role="button">Register</a>
+                        @auth
+                            <a class="btn btn-warning btn-lg" href="{{route('posts.index')}}" role="button">Edit Blog</a>
+
+                        @else
+                            <a class="btn btn-primary btn-lg" href="/login" role="button">Login</a>
+                            <a class="btn btn-success btn-lg" href="/register" role="button">Register</a>
+                            @endauth
+
                     </p>
                 </div>
             </div>

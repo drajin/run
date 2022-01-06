@@ -1,5 +1,4 @@
-<h1>Post Index</h1>
-<p>This is the Posts Index</p>
+
 
 
 
@@ -7,8 +6,12 @@
 
 @extends('layouts.app')
 
+
+
 @section('content')
     <div class="container">
+        <h1>Post Index</h1>
+        <p>This is the Posts Index</p>
         <div class="row justify-content-center">
             <div class="col-md-8">
 {{--                @if(count($posts) > 0)--}}

@@ -11,20 +11,20 @@
                 </div>
 
                 <hr>
-                <small>{{$post->created_at}}</small>
+                <small></small>
                 <hr>
 {{--                @if(!Auth::guest())  --}} {{-- if the user is not a guest show this --}}
                  {{-- the user has to match id --}}
-                <a href="/posts/{{ //$post->id }}/edit" class="btn btn-warning">Edit</a>
-                <form method="POST" action="{{ //action('PostsController@destroy', $post->id) }}" >
+                <a href="" class="btn btn-warning">Edit</a>
+                <form method="POST" action="" >
                     @csrf
                     <input type="hidden" name="_method" value="delete">
                     <div id="operations">
                         <input type="submit" name="commit" class="btn btn-danger float-right" value="Delete" />
                     </div>
                 </form>
-                @endif
-                @endif
+{{--                @endif--}}
+{{--                @endif--}}
             </div>
         </div>
     </div>

@@ -11,7 +11,7 @@
                     <hr class="my-4">
                     <ul>
                         @foreach($posts as $post)
-                        <li>{{$post->title}}</li>
+                        <li><a class="text-decoration-none" href="{{route('single_post',$post->id)}}">{{$post->title}}</a></li>
                             @endforeach
                     </ul>
                     <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
@@ -19,7 +19,8 @@
                         @auth
                             <a class="btn btn-warning btn-lg" href="{{route('posts.index')}}" role="button">Edit Blog Posts</a>
                             <a class="btn btn-primary btn-lg" href="{{route('posts.create')}}" role="button">Add new Post</a>
-
+                            <a class="btn btn-success btn-lg" href="{{route('categories.index')}}" role="button">Manage Categories</a>
+                            <a class="btn btn-success btn-lg" href="{{route('tags.index')}}" role="button">Manage Tags</a>
                         @else
                             <a class="btn btn-primary btn-lg" href="/login" role="button">Login</a>
                             <a class="btn btn-success btn-lg" href="/register" role="button">Register</a>

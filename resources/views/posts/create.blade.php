@@ -9,14 +9,14 @@
                     @csrf
                     <div class="form-group">
                         <label for="title">Title</label>
-                        <input type="title" name="title" value="{{old('title')}}" class="form-control" placeholder="Title">
+                        <input type="text" name="title" value="{{old('title')}}" class="form-control" placeholder="Title">
                         @error('title')
                             <small class="text-danger">{{$message}}</small>
                         @enderror
                     </div>
                     <div class="form-group">
                         <label for="body">Body</label>
-                        <textarea class="form-control" name="body" value="{{old('body')}}" rows="3" placeholder="Body"></textarea>
+                        <textarea class="form-control" name="body" rows="3" placeholder="Body">{{old('body')}}</textarea>
                         @error('body')
                         <small class="text-danger">{{$message}}</small>
                         @enderror

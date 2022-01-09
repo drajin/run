@@ -17,7 +17,7 @@
                     </div>
                     <div class="form-group">
                         <label for="body">Body</label>
-                        <textarea class="form-control" name="body" rows="3" placeholder="Body">{{$post->body}}</textarea>
+                        <textarea class="form-control" name="body" rows="3" placeholder="Body">{{old('body',$post->body)}}</textarea>
                         @error('body')
                         <small class="text-danger">{{$message}}</small>
                         @enderror

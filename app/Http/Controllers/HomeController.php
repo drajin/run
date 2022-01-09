@@ -31,4 +31,9 @@ class HomeController extends Controller
     {
         return view('welcome')->with('posts', Post::latest()->get());
     }
+
+    public function show(Post $post)
+    {
+        return view('posts.show', compact('post'));
+    }
 }

@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Post;
+use App\Models\Tag;
 
-class PostsController extends Controller
+class TagsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,8 +14,7 @@ class PostsController extends Controller
      */
     public function index()
     {
-
-        return view('posts.index')->with('posts', Post::latest()->get());
+        return view('tags.index')->with('tags', Tag::all());
     }
 
     /**
@@ -25,8 +24,7 @@ class PostsController extends Controller
      */
     public function create()
     {
-
-        return view('posts.create');
+        return view('tags.create');
     }
 
     /**
@@ -37,14 +35,11 @@ class PostsController extends Controller
      */
     public function store(Request $request)
     {
+        Tag::create($request->validate([
+            'name' => 'required|max:255',
+        ]));
 
-        $attributes = $request->validate([
-         'title' => 'required|max:255',
-            'body' => 'required',
-        ]);
-
-        Post::create($attributes);
-        return redirect(route('posts.index'));
+        return redirect(route('tags.index'));
     }
 
     /**
@@ -53,11 +48,9 @@ class PostsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Post $post)
+    public function show($id)
     {
-        return view('posts.show')->with('post', Post::find($post)->first());
-//        return view('blog.show')->with('post', Post::where('slug', $slug)->first());
-
+        //
     }
 
     /**
@@ -66,9 +59,9 @@ class PostsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Post $post)
+    public function edit(Tag $tag)
     {
-        return view('posts.edit', compact('post'));
+        return view('tags.edit', compact('tag'));
     }
 
     /**
@@ -78,18 +71,15 @@ class PostsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Post $post)
+    public function update(Tag $tag)
     {
         request()->validate([
-            'title' => 'required|max:255',
-            'body' => 'required',
+           'name' => 'required|max:255',
         ]);
+        $tag->name = request()->name;
+        $tag->save();
 
-        $post->title = request()->title;
-        $post->body = request()->body;
-        $post->save();
-
-        return redirect(route('posts.index'));
+        return redirect(route('tags.index'));
     }
 
     /**
@@ -98,10 +88,9 @@ class PostsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Post $post)
+    public function destroy(Tag $tag)
     {
-        $post->delete();
-
-        return back();
+        $tag->delete();
+        return redirect(route('tags.index'));
     }
 }

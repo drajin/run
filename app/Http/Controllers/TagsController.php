@@ -39,7 +39,7 @@ class TagsController extends Controller
             'name' => 'required|max:255',
         ]));
 
-        return redirect(route('tags.index'));
+        return redirect(route('tags.index'))->with('success', 'New Tag added!');;
     }
 
     /**
@@ -79,7 +79,7 @@ class TagsController extends Controller
         $tag->name = request()->name;
         $tag->save();
 
-        return redirect(route('tags.index'));
+        return redirect(route('tags.index'))->with('success', 'Tag updated!');;
     }
 
     /**
@@ -91,6 +91,6 @@ class TagsController extends Controller
     public function destroy(Tag $tag)
     {
         $tag->delete();
-        return redirect(route('tags.index'));
+        return redirect(route('tags.index'))->with('success', 'Tag removed!');;
     }
 }

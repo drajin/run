@@ -81,7 +81,7 @@ class CategoriesController extends Controller
         $category->name = request('name');
         $category->save();
 
-        return  redirect(route('categories.index'));
+        return  redirect(route('categories.index'))->with('success', 'Category updated!');;;
     }
 
     /**
@@ -93,6 +93,6 @@ class CategoriesController extends Controller
     public function destroy(Category $category)
     {
         $category->delete();
-        return redirect(route('categories.index'));
+        return redirect(route('categories.index'))->with('success', 'Category removed!');;;
     }
 }

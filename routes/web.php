@@ -30,7 +30,8 @@ Route::resource('/categories', CategoriesController::class, [
     'except' => [ 'show' ]
 ]);
 
-//Auth::routes();
+Auth::routes();
+
 Auth::routes(['register' => false]);
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');

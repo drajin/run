@@ -9,4 +9,19 @@ class Post extends Model
 {
     use HasFactory;
     protected $fillable  = ['title', 'body'];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
+
+    public function tag() {
+
+        return $this->belongsToMany(Tag::class);
+    }
 }

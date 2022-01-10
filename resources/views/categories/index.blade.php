@@ -12,6 +12,7 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">
+                @include('inc.messages')
                 <h1>Manage Categories</h1>
                 @if(count($categories) > 0)
                     @foreach ($categories as $category)

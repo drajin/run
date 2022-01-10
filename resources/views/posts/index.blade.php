@@ -12,6 +12,7 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">
+                @include('inc.messages')
                 <h1>Post Index</h1>
                 <p>This is the Posts Index</p>
                 @if(count($posts) > 0)

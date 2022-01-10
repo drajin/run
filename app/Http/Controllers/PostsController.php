@@ -37,14 +37,26 @@ class PostsController extends Controller
      */
     public function store(Request $request)
     {
-
-        $attributes = $request->validate([
+        $request->validate([
          'title' => 'required|max:255',
             'body' => 'required',
         ]);
 
-        Post::create($attributes);
-        return redirect(route('posts.index'));
+//        Post::create([
+//            'title' => $request->title,
+//            'body' => $request->body,
+//            'user_id' => auth()->user()->id,
+//            'category_id' => 1,
+//        ]);
+        $post = new Post;
+        $post->title = $request->title;
+        $post->body = $request->body;
+        $post->user_id = auth()->user()->id;
+        $post->category_id = 1;
+        $post->save();
+
+
+        return redirect(route('posts.index'))->with('success', 'Post created!');
     }
 
     /**
@@ -87,9 +99,12 @@ class PostsController extends Controller
 
         $post->title = request()->title;
         $post->body = request()->body;
+        $post->user_id = auth()->user()->id;
+        $post->category_id = 1;
+
         $post->save();
 
-        return redirect(route('posts.index'));
+        return redirect(route('posts.index'))->with('success', 'Post updated!');
     }
 
     /**
@@ -102,6 +117,6 @@ class PostsController extends Controller
     {
         $post->delete();
 
-        return back();
+        return back()->with('success', 'Post deleted!');;
     }
 }

@@ -9,9 +9,12 @@
                 <div>
                 <p>{{$post->body}}</p>
                 </div>
-
                 <hr>
-                <small></small>
+                <small>{{$post->user->name}}
+                    @foreach($post->tag as $tag)
+                    <span class="badge float-end bg-primary">{{$tag->name}}</span>
+                    @endforeach
+                <span class="badge float-end bg-warning">{{$post->category->name}}</span></small>
                 <hr>
 {{--                @if(!Auth::guest())  --}} {{-- if the user is not a guest show this --}}
                  {{-- the user has to match id --}}

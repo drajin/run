@@ -15,20 +15,29 @@
                 @include('inc.messages')
                 <h1>Manage Categories</h1>
                 @if(count($categories) > 0)
-                    @foreach ($categories as $category)
-                        <div class="card">
-                            <div class="my-3">
-                                <p class="ms-3">{{ $category->name}}</p>
-                                {{--                            <small>Written on {{ $category->created_at }} by {{$category->user['name']}}</small>--}}
-                                <form class="d-inline" method="post" action="{{ route('categories.destroy', $category) }}" >
-                                    @csrf
-                                    @method('delete')
-                                    <button type="submit" class="btn btn-sm btn-danger float-end me-3">Delete</button>
-                                </form>
-                                <a class="btn btn-sm btn-warning float-end me-3" href="{{route('categories.edit', $category)}}">Edit</a>
-                            </div>
-                        </div>
-                    @endforeach
+                    <table class="table">
+                        <thead>
+                        <th>#</th>
+                        <th>Name</th>
+                        </thead>
+
+                        <tbody>
+                        @foreach($categories as $category)
+                            <tr>
+                                <th>{{$category->id}}</th>
+                                <td>
+                                    <a href="">{{$category->name}}</a>
+                                    <form class="d-inline" method="post" action="{{ route('categories.destroy', $category) }}" >
+                                        @csrf
+                                        @method('delete')
+                                        <button type="submit" class="btn btn-sm btn-danger float-end me-3">Delete</button>
+                                    </form>
+                                    <a class="btn btn-sm btn-warning float-end me-3" href="{{route('categories.edit', $category)}}">Edit</a>
+                                </td>
+                            </tr>
+                        @endforeach
+                        </tbody>
+                    </table>
 
                 @else
                     <p>No Categories yet</p>

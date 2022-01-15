@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Post;
+use App\Models\Category;
+use App\Models\Tag;
 
 class PostsController extends Controller
 {
@@ -25,8 +27,10 @@ class PostsController extends Controller
      */
     public function create()
     {
+        $categories = Category::All();
+        $tags = Tag::All();
 
-        return view('posts.create');
+        return view('posts.create', compact('categories', 'tags'));
     }
 
     /**
@@ -39,9 +43,9 @@ class PostsController extends Controller
     {
         $request->validate([
          'title' => 'required|max:255',
-            'body' => 'required',
+         'body' => 'required',
+         'category' => 'required',
         ]);
-
 //        Post::create([
 //            'title' => $request->title,
 //            'body' => $request->body,
@@ -52,8 +56,12 @@ class PostsController extends Controller
         $post->title = $request->title;
         $post->body = $request->body;
         $post->user_id = auth()->user()->id;
-        $post->category_id = 1;
+        $post->category_id = $request->category;
         $post->save();
+
+        $post->tag()->sync($request->tags, false);
+
+
 
 
         return redirect(route('posts.index'))->with('success', 'Post created!');
@@ -80,7 +88,9 @@ class PostsController extends Controller
      */
     public function edit(Post $post)
     {
-        return view('posts.edit', compact('post'));
+        $categories = Category::all();
+        $tags = Tag::all();
+        return view('posts.edit', compact('post', 'categories', 'tags'));
     }
 
     /**
@@ -95,14 +105,17 @@ class PostsController extends Controller
         request()->validate([
             'title' => 'required|max:255',
             'body' => 'required',
+            'category' => 'required',
         ]);
 
         $post->title = request()->title;
         $post->body = request()->body;
         $post->user_id = auth()->user()->id;
-        $post->category_id = 1;
+        $post->category_id = request()->category;
 
         $post->save();
+
+        $post->tag()->sync(request('tags'), true);
 
         return redirect(route('posts.index'))->with('success', 'Post updated!');
     }
@@ -117,6 +130,6 @@ class PostsController extends Controller
     {
         $post->delete();
 
-        return back()->with('success', 'Post deleted!');;
+        return redirect(route('posts.index'))->with('success', 'Post deleted!');;
     }
 }

@@ -17,18 +17,38 @@ use App\Http\Controllers\CategoriesController;
 |
 */
 
-Route::get('/', [HomeController::class, 'welcome']);
+
 Route::view('/about', 'about')->name('about');
+Route::get('/', [HomeController::class, 'welcome']);
 Route::get('/{post}/show', [HomeController::class, 'show'])->name('single_post');
 
-Route::resource('/posts', PostsController::class);
+//Route::group([
+//    'middleware' => 'auth',
+//],function(){
+//    Route::resource('/posts', PostsController::class);
+//    Route::group([
+//    ],function(){
+//        Route::resource('/tags', TagsController::class,['except' => [ 'show' ]]);
+//        Route::resource('/categories', TagsController::class,['except' => [ 'show' ]]);
+//    });
+//});
 
-Route::resource('/tags', TagsController::class , [
-    'except' => [ 'show' ]
-]);
-Route::resource('/categories', CategoriesController::class, [
-    'except' => [ 'show' ]
-]);
+Route::group([
+    'middleware' => 'auth',
+],function(){
+    Route::resource('/posts', PostsController::class);
+    Route::resource('/tags', TagsController::class , [
+        'except' => [ 'show' ]
+    ]);
+    Route::resource('/categories', CategoriesController::class , [
+        'except' => [ 'show' ]
+    ]);
+});
+
+
+
+
+
 
 Auth::routes();
 

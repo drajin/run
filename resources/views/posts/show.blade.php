@@ -16,8 +16,8 @@
                     @endforeach
                 <span class="badge float-end bg-warning">{{$post->category->name}}</span></small>
                 <hr>
-{{--                @if(!Auth::guest())  --}} {{-- if the user is not a guest show this --}}
-                 {{-- the user has to match id --}}
+{{--                @if(!Auth::guest())    if the user is not a guest show this --}}
+                @auth
                 <div>
                     <form method="POST" action="{{route('posts.destroy', $post)}}" >
                         @csrf
@@ -25,8 +25,8 @@
                         <input type="submit" class="btn btn-danger float-end me-3" value="Delete" />
                     </form>
                     <a href="{{route('posts.edit', $post)}}" class="btn btn-warning float-end me-3">Edit</a>
-
                 </div>
+                @endauth
 
 {{--                @endif--}}
 {{--                @endif--}}

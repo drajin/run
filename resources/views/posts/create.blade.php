@@ -21,9 +21,39 @@
                         <small class="text-danger">{{$message}}</small>
                         @enderror
                     </div>
+                    <div class="form-group">
+                        <label for="image">Add Image</label>
+                        <input type="file" class="form-control" id="image">
+                    </div>
+                    <div class="form-group">
+                        <label for="category">Category</label>
+                        <select class="form-control" name="category">
+                                <option selected disabled></option>
+                            @foreach($categories as $category)
+                                <option value="{{$category->id}}" @if(old('category') == $category->id) selected @endif>{{$category->name}}</option>
+                            @endforeach
+                        </select>
+                        @error('category')
+                        <small class="text-danger">{{$message}}</small>
+                        @enderror
+                    </div>
+                    <div class="form-group">
+                        <label for="tags[]">Add Tags</label>
+                        <select class="form-control js-example-basic-multiple" name="tags[]" multiple="multiple">
+                            @foreach($tags as $tag)
+                                <option value="{{$tag->id}}" @if(old('tags[]') == $tag->id) selected @endif>{{$tag->name}}</option>
+                            @endforeach
+                        </select>
+                        @error('tags[]')
+                        <small class="text-danger">{{$message}}</small>
+                        @enderror
+                    </div>
                     <button type="submit" class="btn btn-primary mt-3">Submit</button>
                 </form>
                 </div>
             </div>
         </div>
 @endsection
+
+
+

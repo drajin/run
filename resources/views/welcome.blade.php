@@ -24,7 +24,7 @@
                         @else
                             <a class="btn btn-primary btn-lg" href="/login" role="button">Login</a>
                             <a class="btn btn-success btn-lg" href="/register" role="button">Register</a>
-                            @endauth
+                        @endauth
 
                     </p>
                 </div>

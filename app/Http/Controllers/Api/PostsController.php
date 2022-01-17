@@ -31,7 +31,7 @@ class PostsController extends Controller
         $request->validate([
             'title' => 'required|max:255',
             'body' => 'required',
-            'category' => 'required',
+            'category_id' => 'required',
             'image' => 'mimes:jpg,png,jpeg|max:5048'
         ]);
 

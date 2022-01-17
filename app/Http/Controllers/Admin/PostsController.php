@@ -1,11 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Post;
 use App\Models\Category;
 use App\Models\Tag;
+use Illuminate\Support\Facades\File;
 
 class PostsController extends Controller
 {
@@ -16,8 +18,7 @@ class PostsController extends Controller
      */
     public function index()
     {
-
-        return view('posts.index')->with('posts', Post::latest()->get());
+        return view('posts.index')->with('posts', Post::paginate(5));
     }
 
     /**
@@ -41,10 +42,11 @@ class PostsController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
+         $request->validate([
          'title' => 'required|max:255',
          'body' => 'required',
          'category' => 'required',
+         'image' => 'mimes:jpg,png,jpeg|max:5048'
         ]);
 //        Post::create([
 //            'title' => $request->title,
@@ -52,11 +54,21 @@ class PostsController extends Controller
 //            'user_id' => auth()->user()->id,
 //            'category_id' => 1,
 //        ]);
+//        $new_image_name = time() . '-' . $request->title . '.' . $request->image->extension();
+//
+//        $request->image->move(public_path('images'), $new_image_name);
+
         $post = new Post;
         $post->title = $request->title;
         $post->body = $request->body;
         $post->user_id = auth()->user()->id;
         $post->category_id = $request->category;
+        if(request('image')) {
+            $new_image_name = time() . '-' . $request->title . '.' . $request->image->extension();
+            $request->image->move(public_path('images'), $new_image_name);
+            $post->image_path = $new_image_name;
+        }
+        //'image' => $filename ?? null,
         $post->save();
 
         $post->tag()->sync($request->tags, false);
@@ -75,8 +87,9 @@ class PostsController extends Controller
      */
     public function show(Post $post)
     {
-        return view('posts.show')->with('post', Post::find($post)->first());
-//        return view('blog.show')->with('post', Post::where('slug', $slug)->first());
+       // return view('posts.show')->with('post', Post::where('id', $post->id)->first());
+       //return view('posts.show')->with('post', Post::find($post));
+       return view('posts.show', ['post' => $post]);
 
     }
 
@@ -106,12 +119,18 @@ class PostsController extends Controller
             'title' => 'required|max:255',
             'body' => 'required',
             'category' => 'required',
+            'image' => 'mimes:jpg,png,jpeg|max:5048',
         ]);
 
         $post->title = request()->title;
         $post->body = request()->body;
         $post->user_id = auth()->user()->id;
         $post->category_id = request()->category;
+        if(request('image')) {
+            $new_image_name = time() . '-' . request()->title . '.' . request()->image->extension();
+            request()->image->move(public_path('images'), $new_image_name);
+            $post->image_path = $new_image_name;
+        }
 
         $post->save();
 
@@ -128,6 +147,12 @@ class PostsController extends Controller
      */
     public function destroy(Post $post)
     {
+
+        $image = public_path('images').$post->image_path;
+        if(File::exists($image))
+        {
+            File::delete($image);
+        }
         $post->delete();
 
         return redirect(route('posts.index'))->with('success', 'Post deleted!');;

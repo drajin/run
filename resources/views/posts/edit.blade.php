@@ -23,7 +23,10 @@
                     </div>
                     <div class="form-group">
                         <label for="image">Change Image</label>
-                        <input type="file" class="form-control" id="image">
+                        <input type="file" class="form-control" id="image" name="image">
+                        @error('image')
+                        <small class="text-danger">{{$message}}</small>
+                        @enderror
                     </div>
                     <div class="form-group">
                         <label for="category">Category</label>

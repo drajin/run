@@ -5,7 +5,7 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <h1>Create Post </h1>
-                <form method='post' action="{{route('posts.store')}}">
+                <form method='post' action="{{route('posts.store')}}" enctype="multipart/form-data">
                     @csrf
                     <div class="form-group">
                         <label for="title">Title</label>
@@ -23,7 +23,10 @@
                     </div>
                     <div class="form-group">
                         <label for="image">Add Image</label>
-                        <input type="file" class="form-control" id="image">
+                        <input type="file" class="form-control" id="image" name="image">
+                        @error('image')
+                        <small class="text-danger">{{$message}}</small>
+                        @enderror
                     </div>
                     <div class="form-group">
                         <label for="category">Category</label>

@@ -11,9 +11,10 @@
                     <hr class="my-4">
                     <ul>
                         @foreach($posts as $post)
-                        <li><a class="text-decoration-none" href="{{route('single_post',$post->id)}}">{{$post->title}}</a></li>
-                            @endforeach
+                            <li><a class="text-decoration-none" href="{{route('single_post',$post->id)}}">{{$post->title}}</a></li>
+                        @endforeach
                     </ul>
+                    {{ $posts->links() }}
                     <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
                     <p class="lead">
                         @auth

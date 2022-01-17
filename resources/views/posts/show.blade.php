@@ -1,15 +1,16 @@
 @extends('layouts.app')
-
 @section('content')
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">
-                <a href="/posts" class="btn btn-defult" >Back</a>
+                <a href="/" class="btn btn-defult" >Back</a>
                 <h1>{{$post->title}}</h1>
+                <img class="img-fluid max-width:100%; height:auto;" src="{{asset('/images/'. $post->image_path)}}">
                 <div>
                 <p>{{$post->body}}</p>
                 </div>
                 <hr>
+
                 <small>{{$post->user->name}}
                     @foreach($post->tag as $tag)
                     <span class="badge float-end bg-primary">{{$tag->name}}</span>

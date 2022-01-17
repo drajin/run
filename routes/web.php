@@ -2,10 +2,8 @@
 
 use App\Models\Post;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\PostsController;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\TagsController;
-use App\Http\Controllers\CategoriesController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -19,39 +17,28 @@ use App\Http\Controllers\CategoriesController;
 
 
 Route::view('/about', 'about')->name('about');
-Route::get('/', [HomeController::class, 'welcome']);
+
+Route::get('/', function(){
+    return view('welcome')->with('posts', Post::paginate(5));
+});
 Route::get('/{post}/show', [HomeController::class, 'show'])->name('single_post');
+Route::get('/home', [HomeController::class, 'index'])->name('home');
 
-//Route::group([
-//    'middleware' => 'auth',
-//],function(){
-//    Route::resource('/posts', PostsController::class);
-//    Route::group([
-//    ],function(){
-//        Route::resource('/tags', TagsController::class,['except' => [ 'show' ]]);
-//        Route::resource('/categories', TagsController::class,['except' => [ 'show' ]]);
-//    });
-//});
-
+// Admin Routs
 Route::group([
     'middleware' => 'auth',
+    'prefix' => 'admin',
 ],function(){
-    Route::resource('/posts', PostsController::class);
-    Route::resource('/tags', TagsController::class , [
+    Route::resource('/posts', App\Http\Controllers\Admin\PostsController::class);
+    Route::resource('/tags', App\Http\Controllers\Admin\TagsController::class , [
         'except' => [ 'show' ]
     ]);
-    Route::resource('/categories', CategoriesController::class , [
+    Route::resource('/categories', App\Http\Controllers\Admin\CategoriesController::class , [
         'except' => [ 'show' ]
     ]);
 });
 
-
-
-
-
-
 Auth::routes();
+// disable register
+//  Auth::routes(['register' => false]);
 
-Auth::routes(['register' => false]);
-
-Route::get('/home', [HomeController::class, 'index'])->name('home');

@@ -33,6 +33,8 @@
                 @else
                     <p>No posts found</p>
                 @endif
+
+                {{ $posts->links() }}
             </div>
         </div>
     </div>

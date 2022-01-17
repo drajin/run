@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 use Illuminate\Http\Request;
+use App\Models\Tag;
 
 class HomeController extends Controller
 {
@@ -29,6 +30,12 @@ class HomeController extends Controller
 
     public function show(Post $post)
     {
+        if(request('tag')) {
+            //TODO add tag/category filtering
+//            $posts = Tag::where('name', request('tag'))->firstOrFail()->posts;
+//            return view());
+
+        }
         return view('posts.show', compact('post'));
     }
 }

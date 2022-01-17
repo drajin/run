@@ -27,7 +27,8 @@
                                 <th>{{$category->id}}</th>
                                 <td>
                                     <a href="">{{$category->name}}</a>
-                                    <form class="d-inline" method="post" action="{{ route('categories.destroy', $category) }}" >
+                                    <form class="d-inline" method="post" action="{{ route('categories.destroy', $category) }}"
+                                          onsubmit="return confirm('Are you sure?');" style="display: inline-block;">
                                         @csrf
                                         @method('delete')
                                         <button type="submit" class="btn btn-sm btn-danger float-end me-3">Delete</button>

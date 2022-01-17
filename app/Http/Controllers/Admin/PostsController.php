@@ -48,21 +48,14 @@ class PostsController extends Controller
          'category' => 'required',
          'image' => 'mimes:jpg,png,jpeg|max:5048'
         ]);
-//        Post::create([
-//            'title' => $request->title,
-//            'body' => $request->body,
-//            'user_id' => auth()->user()->id,
-//            'category_id' => 1,
-//        ]);
-//        $new_image_name = time() . '-' . $request->title . '.' . $request->image->extension();
-//
-//        $request->image->move(public_path('images'), $new_image_name);
+
 
         $post = new Post;
         $post->title = $request->title;
         $post->body = $request->body;
         $post->user_id = auth()->user()->id;
         $post->category_id = $request->category;
+
         if(request('image')) {
             $new_image_name = time() . '-' . $request->title . '.' . $request->image->extension();
             $request->image->move(public_path('images'), $new_image_name);

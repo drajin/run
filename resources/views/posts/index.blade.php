@@ -21,7 +21,8 @@
                             <div class="my-3">
                                 <a class="ms-3 text-decoration-none fs-3" href="{{route('posts.show', $post)}}">{{ $post->title}}</a>
 {{--                            <small>Written on {{ $post->created_at }} by {{$post->user['name']}}</small>--}}
-                                <form class="d-inline" method="post" action="{{ route('posts.destroy', $post) }}" >
+                                <form class="d-inline" method="post" action="{{ route('posts.destroy', $post) }}"
+                                      onsubmit="return confirm('Are you sure?');" style="display: inline-block;">
                                     @csrf
                                     @method('delete')
                                     <button type="submit" class="btn btn-sm btn-danger float-end me-3">Delete</button>

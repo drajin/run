@@ -23,7 +23,8 @@
                                 <th>{{$tag->id}}</th>
                                 <td>
                                     <a href="">{{$tag->name}}</a>
-                                    <form class="d-inline" method="post" action="{{ route('tags.destroy', $tag) }}" >
+                                    <form class="d-inline" method="post" action="{{ route('tags.destroy', $tag) }}"
+                                          onsubmit="return confirm('Are you sure?');" style="display: inline-block;">
                                         @csrf
                                         @method('delete')
                                         <button type="submit" class="btn btn-sm btn-danger float-end me-3">Delete</button>

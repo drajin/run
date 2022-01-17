@@ -14,15 +14,17 @@ use App\Http\Controllers\HomeController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+Auth::routes();
+// disable register
+//  Auth::routes(['register' => false]);
 
 Route::view('/about', 'about')->name('about');
 
 Route::get('/', function(){
     return view('welcome')->with('posts', Post::paginate(5));
 });
-Route::get('/{post}/show', [HomeController::class, 'show'])->name('single_post');
 Route::get('/home', [HomeController::class, 'index'])->name('home');
+Route::get('/{post}', [HomeController::class, 'show'])->name('single_post');
 
 // Admin Routs
 Route::group([
@@ -38,7 +40,5 @@ Route::group([
     ]);
 });
 
-Auth::routes();
-// disable register
-//  Auth::routes(['register' => false]);
+
 

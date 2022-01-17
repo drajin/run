@@ -11,11 +11,11 @@
                 </div>
                 <hr>
 
-                <small>{{$post->user->name}}
+                <h6>{{$post->user->name}}
                     @foreach($post->tag as $tag)
-                    <span class="badge float-end bg-primary">{{$tag->name}}</span>
+                    <span class="badge float-end bg-primary me-1"><a class="link-light text-decoration-none" href="/{{$post->id}}?tag={{$tag->name}}">{{$tag->name}}</a></span>
                     @endforeach
-                <span class="badge float-end bg-warning">{{$post->category->name}}</span></small>
+                <span class="badge float-end bg-warning me-1"><a class="link-light text-decoration-none" href="/{{$post->id}}?category={{$post->category->name}}">{{$post->category->name}}</a></span></h6>
                 <hr>
 {{--                @if(!Auth::guest())    if the user is not a guest show this --}}
                 @auth

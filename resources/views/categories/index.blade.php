@@ -12,7 +12,8 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">
-                @include('inc.messages')
+{{--                @include('inc.messages')--}}
+                <x-alert/>
                 <h1>Manage Categories</h1>
                 @if(count($categories) > 0)
                     <table class="table">

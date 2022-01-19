@@ -26,6 +26,8 @@ Route::get('/', function(){
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::get('/{post}', [HomeController::class, 'show'])->name('single_post');
 
+// Route redirect
+Route::redirect('/home', '/');
 // Admin Routs
 Route::group([
     'middleware' => 'auth',

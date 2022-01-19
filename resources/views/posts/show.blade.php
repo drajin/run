@@ -12,6 +12,7 @@
                 <hr>
 
                 <h6>{{$post->user->name}}
+                    <time>{{$post->created_at->diffForHumans()}}</time>
                     @foreach($post->tag as $tag)
                     <span class="badge float-end bg-primary me-1"><a class="link-light text-decoration-none" href="/{{$post->id}}?tag={{$tag->name}}">{{$tag->name}}</a></span>
                     @endforeach
@@ -33,6 +34,5 @@
 {{--                @endif--}}
             </div>
         </div>
-    </div>
     </div>
 @endsection

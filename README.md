@@ -10,8 +10,7 @@ Laravel Blog
 - Route Naming	
 - Route Groups	
 - Route Model Binding
-- TODO Route Redirect - homepage should automatically redirect to the login form
-
+- Route Redirect 
 
 
 **Blade**
@@ -33,8 +32,7 @@ Laravel Blog
 - TODO Authentication: Email Verification
 
 
-**API Basics**
-
+**API**
 
 - API Routes and Controllers
 - API Eloquent Resources
@@ -49,13 +47,16 @@ Laravel Blog
 - Eloquent Relationships: belongsTo / hasMany / belongsToMany
 - Eager Loading and N+1 Query Problem
 - TODO Database Seeders and Factories
+- TODO Eloquent Query Scopes - show only active clients, for example
+- TODO Eloquent Accessors and Mutators - view all date values in m/d/Y format
+- TODO Soft Deletes on any Eloquent models
 
 
-**Full Simple CRUD**	
+**Full CRUD**	
 
 - Route Resource and Resourceful Controllers
 - Forms, Validation and Form Requests
-- File Uploads and Storage Folder Basics
+- File Uploads and Storage Folder
 - Table Pagination
 
 
@@ -63,10 +64,10 @@ Laravel Blog
 
 ## How to use
 
-- Clone the repository with __git clone__
-- Copy __.env.example__ file to __.env__ and edit database credentials there
-- Run __composer install__
-- Run __php artisan key:generate__
-- Run __php artisan migrate --seed__ (it has some seeded data for your testing)
-- That's it: launch the main URL.
+- Download the archive or clone the project using git `git clone https://github.com/drajin/run.git`
+- Rename `.env.example` file to `.env` and edit database credentials there
+- Run `composer install`
+- Run `php artisan migrate`
+- Run `php artisan key:generate`
+- Run `php artisan serve`
 

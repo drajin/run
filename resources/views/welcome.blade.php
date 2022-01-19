@@ -4,10 +4,10 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">
-                <p>This is the min app</p>
+                <p>Worauf warten Sie?</p>
                 <div class="jumbotron">
-                    <h1 class="display-4">title</h1>
-                    <p class="lead">This is the min app</p>
+                    <h1 class="display-4">Schnell APP</h1>
+                    <p class="lead">Laden Sie die neue Schnell APP!</p>
                     <hr class="my-4">
                     <ul>
                         @foreach($posts as $post)
@@ -15,7 +15,7 @@
                         @endforeach
                     </ul>
                     {{ $posts->links() }}
-                    <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
+                    <p>Die APP wurde in 6 Sprachen entwickelt und ihre Nutzung ist sehr einfach.</p>
                     <p class="lead">
                         @auth
                             <a class="btn btn-warning btn-lg" href="{{route('posts.index')}}" role="button">Edit Blog Posts</a>

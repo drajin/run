@@ -8,7 +8,8 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">
-                @include('inc.messages')
+                <x-alert/>
+                {{--                @include('inc.messages')--}}
                 <h1>Manage Tags</h1>
                 @if(count($tags) > 0)
                     <table class="table">

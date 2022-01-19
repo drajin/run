@@ -45,7 +45,6 @@ Laravel Blog
 - Database Migrations
 - Basic Eloquent Model and MVC: Controller -> Model -> View
 - Eloquent Relationships: belongsTo / hasMany / belongsToMany
-- Eager Loading and N+1 Query Problem
 - TODO Database Seeders and Factories
 - TODO Eloquent Query Scopes - show only active clients, for example
 - TODO Eloquent Accessors and Mutators - view all date values in m/d/Y format

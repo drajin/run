@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Http\Requests\PostRequest;
 use App\Models\Post;
 use App\Models\Category;
 use App\Models\Tag;
@@ -40,15 +41,8 @@ class PostsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(PostRequest $request)
     {
-         $request->validate([
-         'title' => 'required|max:255',
-         'body' => 'required',
-         'category' => 'required',
-         'image' => 'mimes:jpg,png,jpeg|max:5048'
-        ]);
-
 
         $post = new Post;
         $post->title = $request->title;
@@ -106,14 +100,8 @@ class PostsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Post $post)
+    public function update(PostRequest $request, Post $post)
     {
-        request()->validate([
-            'title' => 'required|max:255',
-            'body' => 'required',
-            'category' => 'required',
-            'image' => 'mimes:jpg,png,jpeg|max:5048',
-        ]);
 
         $post->title = request()->title;
         $post->body = request()->body;

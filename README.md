@@ -45,10 +45,11 @@ Laravel Blog
 - Database Migrations
 - Basic Eloquent Model and MVC: Controller -> Model -> View
 - Eloquent Relationships: belongsTo / hasMany / belongsToMany
-- TODO Database Seeders and Factories
+- Database Seeders and Factories
 - TODO Eloquent Query Scopes - show only active clients, for example
 - TODO Eloquent Accessors and Mutators - view all date values in m/d/Y format
 - TODO Soft Deletes on any Eloquent models
+- TODO Eloquent Observers
 
 
 **Full CRUD**	
@@ -66,7 +67,7 @@ Laravel Blog
 - Download the archive or clone the project using git `git clone https://github.com/drajin/run.git`
 - Rename `.env.example` file to `.env` and edit database credentials there
 - Run `composer install`
-- Run `php artisan migrate`
+- Run `php artisan migrate --seed`
 - Run `php artisan key:generate`
 - Run `php artisan serve`
 

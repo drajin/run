@@ -3,6 +3,9 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use App\Models\Post;
+use App\Models\User;
+use App\Models\Category;
 
 class DatabaseSeeder extends Seeder
 {
@@ -13,6 +16,13 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
+//        Post::truncate();
+//        Category::truncate();
+//        User::truncate();
+
+
+       // Post::factory()->create();
+        Post::factory()->count(10)->create();
+
     }
 }

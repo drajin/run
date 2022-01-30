@@ -51,6 +51,13 @@ Laravel Blog
 - TODO Soft Deletes on any Eloquent models
 - TODO Eloquent Observers
 
+**Automated Testing with PHPUnit**	
+	
+- UnitTest
+- HTTP tests
+- Database tests
+- Seeder tests
+
 
 **Full CRUD**	
 

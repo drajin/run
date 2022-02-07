@@ -19,7 +19,8 @@ class PostsController extends Controller
      */
     public function index()
     {
-        return view('posts.index')->with('posts', Post::paginate(5));
+        $deleted_posts = Post::onlyTrashed()->get();
+        return view('posts.index')->with('posts', Post::paginate(5))->with('deleted_posts', $deleted_posts);
     }
 
     /**
@@ -126,6 +127,38 @@ class PostsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+    public function trash()
+    {
+        $deleted_posts = Post::onlyTrashed()->get();
+
+        return view('posts.trash',compact('deleted_posts'));
+    }
+
+    public function restore($id)
+    {
+        Post::withTrashed()->findOrFail($id)->restore();
+        return redirect(route('posts.index'))->with('success', 'Post restored.');
+    }
+
+    public function restore_all()
+    {
+        Post::onlyTrashed()->restore();
+        return redirect(route('posts.index'))->with('success', 'All deleted posts are restored.');
+    }
+
+    public function destroy_permanently($id)
+    {
+        Post::withTrashed()->findOrFail($id)->forceDelete();
+        return redirect(route('posts.index'))->with('success', 'Post permanently deleted.');
+    }
+
+    public function destroy_permanently_all()
+    {
+        Post::onlyTrashed()->forceDelete();
+        return redirect(route('posts.index'))->with('success', 'Posts permanently deleted.');
+    }
+
+
     public function destroy(Post $post)
     {
 
@@ -136,6 +169,6 @@ class PostsController extends Controller
         }
         $post->delete();
 
-        return redirect(route('posts.index'))->with('success', 'Post deleted!');;
+        return redirect(route('posts.index'))->with('success', 'Post moved to Trash!');
     }
 }

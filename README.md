@@ -48,7 +48,7 @@ Laravel Blog
 - Database Seeders and Factories
 - TODO Eloquent Query Scopes - show only active clients, for example
 - TODO Eloquent Accessors and Mutators - view all date values in m/d/Y format
-- TODO Soft Deletes on any Eloquent models
+- Soft Deletes on Eloquent models
 - TODO Eloquent Observers
 
 **Automated Testing with PHPUnit**	

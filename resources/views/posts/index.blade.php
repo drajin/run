@@ -6,8 +6,6 @@
 
 @extends('layouts.app')
 
-
-
 @section('content')
     <div class="container">
         <div class="row justify-content-center">
@@ -34,9 +32,22 @@
                         </div>
                     @endforeach
                     <hr>
-                        <a class="btn btn-primary btn" href="{{route('posts.create')}}" role="button">Add new Post</a>
+                        @if($deleted_posts->count()>0)
+                        <div class="clearfix">
+                            <a class="fw-bold text-decoration-none float-end" href="{{route('trash')}}">Trash ({{$deleted_posts->count()}})</a>
+                        </div>
+                        @else
+
+
+
+                            <div class="clearfix">
+                                <p class="float-end">Trash is empty</p>
+                            </div>
+                        @endif
+                    <hr>
+                        <a class="btn btn-primary btn mb-3" href="{{route('posts.create')}}" role="button">Add new Post</a>
                 @else
-                    <p>No posts found</p>
+                    <p class="mb-3">No posts found</p>
                 @endif
 
                 {{ $posts->links() }}

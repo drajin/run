@@ -3,6 +3,7 @@
 use App\Models\Post;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\Admin\PostsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,6 +34,12 @@ Route::group([
     'middleware' => 'auth',
     'prefix' => 'admin',
 ],function(){
+    Route::get('/trash', [PostsController::class, 'trash'])->name('trash');
+    Route::get('/trash/restore/{post}', [PostsController::class, 'restore'])->name('restore');
+    Route::get('/trash/restore_all', [PostsController::class, 'restore_all'])->name('restore_all');
+    Route::get('/trash/destroy_permanently/{post}', [PostsController::class, 'destroy_permanently'])->name('destroy_permanently');
+    Route::get('/trash/destroy_permanently_all', [PostsController::class, 'destroy_permanently_all'])->name('destroy_permanently_all');
+
     Route::resource('/posts', App\Http\Controllers\Admin\PostsController::class);
     Route::resource('/tags', App\Http\Controllers\Admin\TagsController::class , [
         'except' => [ 'show' ]

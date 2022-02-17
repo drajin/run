@@ -24,8 +24,12 @@ Route::view('/about', 'about')->name('about');
 Route::get('/', function(){
     return view('welcome')->with('posts', Post::paginate(5));
 });
-Route::get('/home', [HomeController::class, 'index'])->name('home');
-Route::get('/{post}', [HomeController::class, 'show'])->name('single_post');
+
+Route::controller(HomeController::class)->group(function(){
+    Route::get('/home', 'index')->name('home');
+    Route::get('/{post}', 'show')->name('single_post');
+});
+
 
 // Route redirect
 Route::redirect('/home', '/');

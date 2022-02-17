@@ -67,6 +67,13 @@ Laravel Blog
 - Table Pagination
 
 
+**Laravel 9 Features**	
+
+- Controller Route Groups
+- TODO str() and to_route() Helper Functions
+- TODO Forced Scope Bindings
+
+
 ---
 
 ## How to use
